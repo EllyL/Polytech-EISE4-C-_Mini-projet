@@ -1,14 +1,18 @@
 
 #include <iostream>
 #include "composantM.hh"
+#include "personnage.hh"
+#include "joueur.hh"
+
+using namespace std;
 
 int main()
 {
 
-ComposantM a(0,0,"test.jpg");
-ComposantM b(1,1,"test.jpg");
-a.affichage();
-b.affichage();
+Joueur a(0,0,"test.jpg");
+// b(1,1,"test.jpg");
+cout << a.affichage()<<endl;
+//b.affichage();
 
 return 0;
 }

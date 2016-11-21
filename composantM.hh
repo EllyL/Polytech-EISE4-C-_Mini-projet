@@ -8,6 +8,7 @@ objet sur la carte.
 
 
 #pragma once
+#include <string>
 
 using namespace std;
 
@@ -18,13 +19,8 @@ class ComposantM{
 private :
 
 public:
-	void affichage();
-	ComposantM(unsigned int x, unsigned int y,string image);
-	~ComposantM();
-	string getclass(){return "ComposantM";}
-	
-	
-	string itoa ( int nb );
+	virtual string getclass() const =0;			//fonction renvoyant le nom de l'objet
+	virtual string affichage() const =0;		//fonction d'affichage de l'objet 
 
 protected:
 	string _nom;

@@ -22,6 +22,9 @@ Joueur::Joueur(unsigned int x, unsigned int y,string image)
 	_posy = y;
 	_image = image;
 
+	_bonus=false;
+	_score =0;
+	_nbVie=3;
 	_i++;
 }
 

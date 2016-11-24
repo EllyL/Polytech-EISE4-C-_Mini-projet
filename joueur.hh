@@ -28,7 +28,20 @@ public:
 	void set_posy(unsigned int y){_posy = y;}
 	unsigned int get_posy() {return _posy;}
 
+	void set_score(unsigned int score){_score = score;}
+	unsigned int get_score() {return _score;}
+
+	void set_nbVie(unsigned int nbVie){_nbVie = nbVie;}
+	unsigned int get_nbVie() {return _nbVie;}
+	
+	void set_bonus(unsigned int bonus){_bonus = bonus;}
+	unsigned int get_bonus() {return _bonus;}
+
+
 protected:
+	unsigned int _score;
+	unsigned int _nbVie;
+	bool _bonus;
 	
 
 };

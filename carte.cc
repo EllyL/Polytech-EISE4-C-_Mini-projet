@@ -1,4 +1,4 @@
-/****************************************************************************************** 
+/******************************************************************************************
  * [Polytech-EISE4-C++] 2016-2017 LEVERT MAURY                                            *
  * La Classe Carte doit afficher la carte dans laquelle les personnages évoluent.         *
  * Il faut afficher les obstacles (murs), objets et personnages.                          *
@@ -8,13 +8,110 @@
 
 #include "carte.hh"
 
-/*
- * Le constructeur va prendre le nom du type d'élément que l'on veut mettre en place, puis le nombre voulu de ce type.
- * Une map de jeu est alors construite de façon aléatoire selon des conditions critiques pour des raisons de jouabilité.
- */
-Carte::Carte(unsigned int ligne, unsigned int colonne, ){
-	map = (composantM**)malloc(sizeof(composantM*)*ligne);
+using namespace std;
+
+Carte::Carte(){
+
+   _ligne = DEF_SIZE;
+   _colonne = DEF_SIZE;
+
+	_map = (ComposantM***) malloc(sizeof(ComposantM**)*_ligne);
+   for(unsigned int i=0; i<_ligne; i++)
+      _map[i] = (ComposantM**) malloc(sizeof(ComposantM*)*_colonne);
+
+   for(unsigned int i=0; i< _ligne; i++)
+      for(unsigned int j=0; j<_colonne; j++){
+            _map[i][j] = new Chemin(0,0);
+      }
 
 }
 
+/*
+ * Le constructeur va prendre le nom du type d'élément que l'on veut mettre en place, puis le nombre voulu de ce type.
+ * Une map de jeu est alors construite de façon aléatoire selon des conditions critiques pour des raisons de jouabilité.
+ * La carte est modélisée par une matrice, une case correspondant à une position, la case contenant le type de l'élément.
+ */
+
+Carte::Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, unsigned int nbBonus, unsigned int nbFantome, unsigned int nbVote, unsigned int nbPrison) : _ligne(ligne), _colonne(colonne){
+
+   unsigned int i, j, k;
+
+	_map = (ComposantM***) malloc(sizeof(ComposantM**)*_ligne);
+   for(i=0; i<ligne; i++)
+      _map[i] = (ComposantM**) malloc(sizeof(ComposantM*)*_colonne);
+
+   for(unsigned int i=0; i< _ligne; i++)
+      for(unsigned int j=0; j<_colonne; j++)
+         _map[i][j] = new Chemin(i, j);
+
+   for(k=0; k<nbJoueur; k++){
+      i = rand()%_ligne;
+      j = rand()%_colonne;
+      _map[i][j] = new Joueur(i, j);
+   }
+
+   for(k=0; k<nbBonus; k++){
+      i = rand()%ligne;
+      j = rand()%colonne;
+      _map[i][j] = new Bonus(i, j);
+   }
+
+   for(k=0; k<nbPrison; k++){
+      i = rand()%ligne;
+      j = rand()%colonne;
+      _map[i][j] = new Prison(i, j);
+   }
+
+   for(k=0; k<nbVote; k++){
+      i = rand()%ligne;
+      j = rand()%colonne;
+      _map[i][j] = new Vote(i, j);
+   }
+
+   for(k=0; k<nbFantome; k++){
+      i = rand()%ligne;
+      j = rand()%colonne;
+      _map[i][j] = new Fantome(i, j);
+   }
+}
+
+void Carte::afficherMap(void){
+
+   unsigned int i, j;
+
+   for(j=0; j<_colonne+2; j++){
+      cout << "-";
+   }
+   for(i=0; i<_ligne; i++){
+         cout << endl << "|";
+      for(j=0; j<_colonne; j++){
+         if (_map[i][j]->getclass()=="Joueur")
+               cout << "J";
+
+         else if (_map[i][j]->getclass()=="Bonus")
+               cout << "B";
+
+         else if (_map[i][j]->getclass()=="Fantome")
+               cout << "F";
+
+         else if (_map[i][j]->getclass()=="Prison")
+               cout << "P";
+
+         else if (_map[i][j]->getclass()=="Vote")
+               cout << "V";
+
+         else if (_map[i][j]->getclass()=="Obstacle")
+            cout << "#";
+
+         else if (_map[i][j]->getclass()=="Chemin")
+            cout << " ";
+      }
+      cout << "|";
+   }
+   cout << endl;
+   for(j=0; j<_colonne+2; j++){
+      cout << "-";
+   }
+   cout << endl;
+}
 

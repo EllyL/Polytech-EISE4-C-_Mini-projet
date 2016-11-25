@@ -9,27 +9,25 @@
 #include <iostream>
 #include <string>
 #include "composantM.hh"
-#include "joueur.hh"
-#include "prison.hh"
-#include "bonus.hh"
-#include "vote.hh"
-#include "fantome.hh"
-#include "chemin.hh"
 
-#define DEF_SIZE 10
+class Chemin: public ComposantM{
+   protected :
 
-class Carte {
-protected :
-   unsigned int _ligne, _colonne;
-	ComposantM ***_map;
+   public :
+      Chemin(unsigned int x, unsigned int y);
+      Chemin(const Chemin &a);
+      ~Chemin();
 
-public :
-   Carte();
-	Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, unsigned int nbBonus, unsigned int nbFantome, unsigned int nbVote, unsigned int nbPrison);
-	//~Carte();
+      string affichage() const;			//fonction d'affichage de l'objet
+      string getclass() const{return "Chemin";}
+      void operator= (const Chemin &a);
 
-	void afficherMap(void);
 
-	//ComposantM** setIndex();
-	//ComposantM** getIndex ();
+      void set_posx(unsigned int x){_posx = x;}
+      unsigned int get_posx() {return _posx;}
+
+      void set_posy(unsigned int y){_posy = y;}
+      unsigned int get_posy() {return _posy;}
 };
+
+

@@ -7,29 +7,16 @@
  ******************************************************************************************/
 
 #include <iostream>
-#include <string>
-#include "composantM.hh"
-#include "joueur.hh"
-#include "prison.hh"
-#include "bonus.hh"
-#include "vote.hh"
-#include "fantome.hh"
-#include "chemin.hh"
+#include "carte.hh"
 
-#define DEF_SIZE 10
+using namespace std;
 
-class Carte {
-protected :
-   unsigned int _ligne, _colonne;
-	ComposantM ***_map;
+int main()
+{
 
-public :
-   Carte();
-	Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, unsigned int nbBonus, unsigned int nbFantome, unsigned int nbVote, unsigned int nbPrison);
-	//~Carte();
+Carte world(10,10,1,1,1,1,1);
+//Carte world;
+world.afficherMap();
 
-	void afficherMap(void);
-
-	//ComposantM** setIndex();
-	//ComposantM** getIndex ();
-};
+return 0;
+}

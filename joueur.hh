@@ -17,10 +17,13 @@ objet sur la carte.
 class Joueur: public Personnage{
 
 public:
-	Joueur(unsigned int x, unsigned int y,string image);
+	Joueur(unsigned int x, unsigned int y);
 	~Joueur();
 	string affichage() const;
 	string getclass() const {return "Joueur";}
+
+
+	//Accesseur des attributs
 
 	void set_posx(unsigned int x){_posx = x;}
 	unsigned int get_posx() {return _posx;}
@@ -40,7 +43,6 @@ public:
 
 protected:
 	unsigned int _score;
-	unsigned int _nbVie;
 	bool _bonus;
 	
 

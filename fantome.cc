@@ -13,15 +13,15 @@ using namespace std;
 
 
 
-Fantome::Fantome(unsigned int x, unsigned int y,string image)
+Fantome::Fantome(unsigned int x, unsigned int y)
 {
 	_nom = getclass()+to_string(_i);
 	_posx = x;
 	_posy = y;
-	_image = image;
+	_image = "";
 
 	
-	_vie=true;
+	_nbVie=1;
 	_i++;
 }
 

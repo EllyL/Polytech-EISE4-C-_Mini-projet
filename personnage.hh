@@ -18,7 +18,8 @@ public:
 	
 	virtual string affichage() const =0;			//fonction d'affichage de l'objet 
 	virtual string getclass() const=0;				//fonction renvoyant le nom de l'objet
-
+protected: 
+	unsigned int _nbVie;
 	
 
 };

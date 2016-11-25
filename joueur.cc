@@ -15,12 +15,12 @@ using namespace std;
 
 
 
-Joueur::Joueur(unsigned int x, unsigned int y,string image)
+Joueur::Joueur(unsigned int x, unsigned int y)
 {
 	_nom = getclass()+to_string(_i);
 	_posx = x;
 	_posy = y;
-	_image = image;
+	_image = "";
 
 	_bonus=false;
 	_score =0;

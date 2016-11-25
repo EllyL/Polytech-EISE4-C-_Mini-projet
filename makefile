@@ -2,42 +2,40 @@ CC = g++
 OPT = $(CC) -Wall -std=c++11
 
 
-jeu : main.o carte.o composantM.o personnage.o objet.o obstacle.o joueur.o fantome.o bonus.o prison.o vote.o 
-	$(OPT) -c jeu main.o carte.o composantM.o personnage.o object.o obstacle.o joueur.o fantome.o bonus.o prison.o vote.o
+jeu : main.o composantM.o joueur.o fantome.o obstacle.o  prison.o vote.o bonus.o # carte.o objet.o
+	$(OPT) -o jeu main.o composantM.o joueur.o fantome.o obstacle.o  prison.o vote.o bonus.o #   carte.o   objet.o
 
-main.o : main.cc carte.hh composantM.hh personnage.hh objet.hh obstacle.hh joueur.hh fantome.hh bonus.hh prison.hh vote.hh 
-	$(OPT) -o main.cc 
+main.o : main.cc composantM.hh personnage.hh  joueur.hh fantome.hh obstacle.hh objet.hh prison.hh vote.hh  #bonus.hh   carte.hh  
+	$(OPT) -c main.cc 
 
 
 composantM.o : composantM.hh composantM.cc
-	$(OPT) -o composantM.cc
+	$(OPT) -c composantM.cc
 
-personnage.o : personnage.hh personnage.cc composantM.hh
-	$(OPT) -o personnage.cc 
 
-objet.o : objet.cc objet.hh composantM.hh
-	$(OPT) -o objet.cc
+#objet.o : objet.cc objet.hh composantM.hh
+#	$(OPT) -c objet.cc
 
 obstacle.o : obstacle.cc obstacle.hh composantM.hh
-	$(OPT) -o obstacle.cc
+	$(OPT) -c obstacle.cc
 
 joueur.o : joueur.cc joueur.hh personnage.hh
-	$(OPT) -o joueur.cc
+	$(OPT) -c joueur.cc
 
 fantome.o : fantome.cc fantome.hh personnage.hh
-	$(OPT) -o fantome.cc
+	$(OPT) -c fantome.cc
 
-bonus.o : bonus.cc bonus.hh object.hh
-	$(OPT) -o bonus.cc
+bonus.o : bonus.cc bonus.hh objet.hh
+	$(OPT) -c bonus.cc
 
-prison.o : prison.cc prison.hh object.hh
-	$(OPT) -o prison.cc
+prison.o : prison.cc prison.hh objet.hh
+	$(OPT) -c prison.cc
 
-vote.o : vote.cc vote.hh object.hh
-	$(OPT) -o vote.cc
+vote.o : vote.cc vote.hh objet.hh
+	$(OPT) -c vote.cc
 
-carte.o : carte.cc carte.hh
-	$(OPT) -o carte.cc
+#carte.o : carte.cc carte.hh
+#	$(OPT) -c carte.cc
 
 clean :
 	rm -f *.o 

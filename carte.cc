@@ -44,36 +44,78 @@ Carte::Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, un
       for(unsigned int j=0; j<_colonne; j++)
          _map[i][j] = new Chemin(i, j);
 
-   for(k=0; k<nbJoueur; k++){
+
+   k=0;
+   while(k<nbJoueur){
       i = rand()%_ligne;
       j = rand()%_colonne;
-      _map[i][j] = new Joueur(i, j);
+       if(_map[i][j]->getclass()=="Chemin"){
+            _map[i][j] = new Joueur(i, j);
+            k++;
+         }
    }
 
-   for(k=0; k<nbBonus; k++){
+   k=0;
+   while(k<nbBonus){
+  
       i = rand()%ligne;
       j = rand()%colonne;
-      _map[i][j] = new Bonus(i, j);
+      if(_map[i][j]->getclass()=="Chemin"){
+            _map[i][j] = new Bonus(i, j);
+            k++;
+         }
    }
 
-   for(k=0; k<nbPrison; k++){
+   k=0;
+   while(k<nbPrison){
+   
       i = rand()%ligne;
       j = rand()%colonne;
-      _map[i][j] = new Prison(i, j);
+      if(_map[i][j]->getclass()=="Chemin"){
+          _map[i][j] = new Prison(i, j);
+          k++;
+       }
    }
 
-   for(k=0; k<nbVote; k++){
+   k=0;
+   while(k<nbVote){
+   
       i = rand()%ligne;
       j = rand()%colonne;
-      _map[i][j] = new Vote(i, j);
+      if(_map[i][j]->getclass()=="Chemin"){
+         _map[i][j] = new Vote(i, j);
+         k++;
+      }
    }
 
-   for(k=0; k<nbFantome; k++){
+    k=0;
+   while(k<nbFantome){
+  
       i = rand()%ligne;
       j = rand()%colonne;
-      _map[i][j] = new Fantome(i, j);
+      if(_map[i][j]->getclass()=="Chemin"){
+         _map[i][j] = new Fantome(i, j);
+         k++;
+      }
+   }
+
+   k=0;
+  while(k<(ligne*colonne)/4){
+      i = rand()%ligne;
+      j = rand()%colonne;
+      if(_map[i][j]->getclass()=="Chemin"){
+          _map[i][j] = new Obstacle(i, j);
+          k++;
+      }
    }
 }
+
+
+
+/*Carte::Carte(unsigned int nbJoueur, unsigned int nbBonus, unsigned int nbFantome, unsigned int nbVote, unsigned int nbPrison);
+ {
+
+}*/
 
 void Carte::afficherMap(void){
 

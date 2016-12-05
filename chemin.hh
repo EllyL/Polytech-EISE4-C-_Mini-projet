@@ -5,7 +5,7 @@
  * La position de tous doit être mise à jour à chaque déplacement, récupération d'objet.  *
  * L'affichage doit être rafraîchi après certaines action (déplacement, effet objet).     *
  ******************************************************************************************/
-
+#pragma once
 #include <iostream>
 #include <string>
 #include "composantM.hh"

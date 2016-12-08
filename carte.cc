@@ -157,3 +157,42 @@ void Carte::afficherMap(void){
    cout << endl;
 }
 
+
+int Carte::getJoueur(int& k){
+
+  unsigned int i,j;
+   for(i=0;i<_ligne;i++)
+   {
+      for(j=0;j<_colonne;j++)
+      {
+         if(_map[i][j]->getclass()=="Joueur")
+         {
+            k= j;
+            return i;
+         }
+      }
+   }
+   return -1;
+}
+
+void Carte::setJoueur(int x, int y,int decX, int decY)
+{
+
+   if(_map[y+decY][x+decX]->getclass() == "Obstacle" || x+decX <0 || x+decX >=(int)_colonne || y+decY < 0 ||y+decY >= (int)_ligne)
+   {
+    
+         std::cout<<"MUR!"<<std::endl;
+   }
+   else
+   {
+      _map[y][x]->set_posx(x+decX);
+      _map[y][x]->set_posy(y+decY);
+      _map[y+decY][x+decX] = _map[y][x];
+      _map[y][x] = new Chemin(y,x);
+   }
+   
+
+}
+
+
+

@@ -22,6 +22,14 @@ public:
 	virtual string getclass() const =0;			//fonction renvoyant le nom de l'objet
 	virtual string affichage() const =0;		//fonction d'affichage de l'objet 
 
+
+	
+	void set_posx(unsigned int x){_posx = x;}
+	unsigned int get_posx() {return _posx;}
+
+	void set_posy(unsigned int y){_posy = y;}
+	unsigned int get_posy() {return _posy;}
+
 protected:
 	string _nom;
 	unsigned int _posx;

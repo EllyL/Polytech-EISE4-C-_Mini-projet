@@ -36,4 +36,7 @@ public :
 
 	//ComposantM** setIndex();
 	//ComposantM** getIndex ();
+
+	int getJoueur(int& j);
+	void setJoueur(int x, int y,int decX, int decY);
 };

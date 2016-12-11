@@ -157,7 +157,6 @@ void Carte::afficherMap(void){
    cout << endl;
 }
 
-
 int Carte::getJoueur(int& k){
 
   unsigned int i,j;
@@ -175,14 +174,42 @@ int Carte::getJoueur(int& k){
    return -1;
 }
 
-void Carte::setJoueur(int x, int y,int decX, int decY)
+void Carte::setJoueur(int x, int y,int decX, int decY,bool& perdu)
 {
 
    if(_map[y+decY][x+decX]->getclass() == "Obstacle" || x+decX <0 || x+decX >=(int)_colonne || y+decY < 0 ||y+decY >= (int)_ligne)
    {
     
          std::cout<<"MUR!"<<std::endl;
+   }else if(_map[y+decY][x+decX]->getclass() == "Fantome")
+   {
+         perdu =true;
    }
+   else
+   {
+      _map[y][x]->set_posx(x+decX);
+      _map[y][x]->set_posy(y+decY);
+      _map[y+decY][x+decX] = _map[y][x];
+      _map[y][x] = new Chemin(y,x);
+   }
+   
+
+}
+
+void Carte::setFantome(int x, int y,int decX, int decY,bool& perdu)
+{
+
+   if(_map[y+decY][x+decX]->getclass() == "Fantome" || _map[y+decY][x+decX]->getclass() == "Obstacle"
+    || x+decX <0 || x+decX >=(int)_colonne || y+decY < 0 ||y+decY >= (int)_ligne)
+   {
+    
+        std::cout<<"MURFantome!"<<std::endl;
+   }else
+      if(_map[y+decY][x+decX]->getclass() == "Joueur")
+      {
+         perdu =true;
+       
+      }
    else
    {
       _map[y][x]->set_posx(x+decX);
@@ -196,3 +223,26 @@ void Carte::setJoueur(int x, int y,int decX, int decY)
 
 
 
+
+
+void Carte::DeplacementFantome(bool &perdu)
+{
+
+   unsigned int i,j;
+   int depX,depY;                      //déplacement aléatoire des fantomes.
+    for(i=0;i<_ligne;i++)
+   {
+      for(j=0;j<_colonne;j++)
+      {
+          if(_map[i][j]->getclass()=="Fantome")
+         {
+               depX =( rand()%2) -1;               // -1, 0, ou 1
+               depY=( rand()%2) -1;
+               setFantome(j,i,depX,depY,perdu);
+         }
+
+      }
+
+   }
+
+}

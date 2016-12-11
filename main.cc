@@ -19,12 +19,11 @@
 #include "bonus.hh"
 #include "chemin.hh"
 #include "carte.hh"
-
+#define NBF 4
 
 using namespace std;
 
-
-void deplacementJoueur(Carte& C)
+void deplacementJoueur(Carte& C,bool& perdu)
 {
 	bool Vchoix= false;
 	int choix;
@@ -33,35 +32,35 @@ void deplacementJoueur(Carte& C)
 	while(Vchoix == false){
 		
 		std::cout<< "Quelle direction ?"<<std::endl;
-		std::cout << " 1.haut  2.droite 3.bas 4.gauche";
+		std::cout << " 8.haut  6.droite 2.bas 4.gauche";
 		cin>>choix;
 
 		switch(choix)
 		{
-			case 1:
+			case 8:
 				PosYJoueur = C.getJoueur(PosXJoueur);
-				C.setJoueur(PosXJoueur,PosYJoueur,0,-1);
+				C.setJoueur(PosXJoueur,PosYJoueur,0,-1,perdu);
 				PosYJoueur = C.getJoueur(PosXJoueur);
 				Vchoix=true;
 			 	break;
 
-			case 2: 
+			case 6: 
 				PosYJoueur = C.getJoueur(PosXJoueur);
-				C.setJoueur(PosXJoueur,PosYJoueur,1,0);
+				C.setJoueur(PosXJoueur,PosYJoueur,1,0,perdu);
 				PosYJoueur = C.getJoueur(PosXJoueur);
 				Vchoix=true;
 			break;
 
-			case 3: 
+			case 2: 
 				PosYJoueur = C.getJoueur(PosXJoueur);
-				C.setJoueur(PosXJoueur,PosYJoueur,0,1);
+				C.setJoueur(PosXJoueur,PosYJoueur,0,1,perdu);
 				PosYJoueur = C.getJoueur(PosXJoueur);
 				Vchoix=true;
 			break;
 
 			case 4: 
 				PosYJoueur = C.getJoueur(PosXJoueur);
-				C.setJoueur(PosXJoueur,PosYJoueur,-1,0);
+				C.setJoueur(PosXJoueur,PosYJoueur,-1,0,perdu);
 				PosYJoueur = C.getJoueur(PosXJoueur);
 				Vchoix=true;
 				break;
@@ -82,13 +81,18 @@ void deplacementJoueur(Carte& C)
 int main()
 {
 	std::srand(std::time(0));
-	Carte C(20,20,1,2,4,15,2);
+//parametre ligne , colonne ,Joueur, Bonus, Fantome, Vote, Prison
+	Carte C(20,20,1,2,NBF,15,2);
 
-	while(1){
+	bool perdu=false;
+	
+
+	while(perdu != true){
 		C.afficherMap();
-		deplacementJoueur(C);
-		
+		deplacementJoueur(C,perdu);
+		C.DeplacementFantome(perdu);
 
+	
 	}
 
 

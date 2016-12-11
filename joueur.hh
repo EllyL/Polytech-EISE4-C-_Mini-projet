@@ -37,13 +37,17 @@ public:
 	void set_nbVie(unsigned int nbVie){_nbVie = nbVie;}
 	unsigned int get_nbVie() {return _nbVie;}
 	
-	void set_bonus(unsigned int bonus){_bonus = bonus;}
-	unsigned int get_bonus() {return _bonus;}
+	void set_bonus(bool bonus){_bonus = bonus;}
+	bool get_bonus() {return _bonus;}
+
+	void set_perdu(bool perdu){_perdu = perdu;}
+	bool get_perdu() {return _perdu;}
 
 
 protected:
 	unsigned int _score;
 	bool _bonus;
+	bool _perdu;
 	
 
 };

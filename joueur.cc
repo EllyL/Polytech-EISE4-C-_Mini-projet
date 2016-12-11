@@ -21,7 +21,7 @@ Joueur::Joueur(unsigned int x, unsigned int y)
 	_posx = x;
 	_posy = y;
 	_image = "";
-
+	_perdu =false;
 	_bonus=false;
 	_score =0;
 	_nbVie=3;

@@ -18,6 +18,7 @@ class Joueur: public Personnage{
 
 public:
 	Joueur(unsigned int x, unsigned int y);
+	Joueur(Joueur& J);
 	~Joueur();
 	string affichage() const;
 	string getclass() const {return "Joueur";}
@@ -37,8 +38,8 @@ public:
 	void set_nbVie(unsigned int nbVie){_nbVie = nbVie;}
 	unsigned int get_nbVie() {return _nbVie;}
 	
-	void set_bonus(bool bonus){_bonus = bonus;}
-	bool get_bonus() {return _bonus;}
+	void set_bonus(int bonus){_tpBonus = bonus;}
+	int get_bonus() {return _tpBonus;}
 
 	void set_perdu(bool perdu){_perdu = perdu;}
 	bool get_perdu() {return _perdu;}
@@ -46,7 +47,7 @@ public:
 
 protected:
 	unsigned int _score;
-	bool _bonus;
+	int _tpBonus;				//temps de bonus
 	bool _perdu;
 	
 

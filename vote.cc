@@ -21,7 +21,7 @@ Vote::Vote(unsigned int x, unsigned int y)
 	_posy = y;
 	_image = "";
 	_point = 10;
-	_effet = "vous gagnez " + to_string(_point) + " points";
+	_effet = "vous gagnez 10 points";
 	_i++;
 }
 

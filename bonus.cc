@@ -20,7 +20,7 @@ Bonus::Bonus(unsigned int x, unsigned int y)
 	_posx = x;
 	_posy = y;
 	_image = "";
-	_duree = 100;
+	_duree = 30;
 	_effet = "vous devenez indestructible";
 	_i++;
 }

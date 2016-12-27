@@ -22,11 +22,22 @@ Joueur::Joueur(unsigned int x, unsigned int y)
 	_posy = y;
 	_image = "";
 	_perdu =false;
-	_bonus=false;
+	_tpBonus=0;
 	_score =0;
 	_nbVie=3;
 	_i++;
 }
+/*Joueur::Joueur(Joueur& J){
+	_nom = J._nom;
+	_posx = J._posx;
+	_posy = J._posy;
+	_image = J._image;
+	_perdu =false;
+	_bonus=J._bonus;
+	_score =J._score;
+	_nbVie=J._nbVie;
+	_i++;
+}*/
 
 Joueur::~Joueur(){
 _i--;

@@ -296,3 +296,42 @@ void Carte::DeplacementFantome(bool &perdu)
    }
 
 }
+
+int** Carte::getTileMap(){
+  int** tab;
+ unsigned int i,j;
+
+  tab = static_cast<int**>(malloc(sizeof(int**)*_ligne));
+   for(i=0; i<_ligne; i++)
+      tab[i] = static_cast<int*>(malloc(sizeof(int*)*_colonne));
+
+
+
+  for(i=0;i<_ligne;i++)
+  {
+    for(j=0;j<_colonne;j++)
+    {
+      if(_map[i][j]->getclass() == "Chemin")
+        tab[i][j] = 0;
+
+      if(_map[i][j]->getclass() == "Obstacle")
+        tab[i][j] = 1;
+
+      if(_map[i][j]->getclass() == "Vote")
+        tab[i][j] = 2;
+
+      if(_map[i][j]->getclass() == "Joueur")
+        tab[i][j] = 3;
+
+      if(_map[i][j]->getclass() == "Fantome")
+        tab[i][j] = 4;
+
+      if(_map[i][j]->getclass() == "Bonus")
+        tab[i][j] = 5;
+
+      if(_map[i][j]->getclass() == "Prison")
+        tab[i][j] = 6;
+    }
+  }
+  return tab;
+}

@@ -43,4 +43,6 @@ public :
 
 	void DeplacementFantome(bool& perdu);
 	void setFantome(int x, int y,int decX, int decY,bool& perdu);
+
+	int** getTileMap();
 };

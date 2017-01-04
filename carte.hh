@@ -38,8 +38,8 @@ public :
 	//ComposantM** getIndex ();
 
 
-	int getJoueur(int& j);
-	void setJoueur(int x, int y,int decX, int decY,bool& perdu);
+	void getJoueur(int& k,int& l);
+	void setJoueur(int x, int y,int decX, int decY,bool& perdu, int& scoreJ, std::string& effet);
 
 	void DeplacementFantome(bool& perdu);
 	void setFantome(int x, int y,int decX, int decY,bool& perdu);

@@ -42,7 +42,7 @@
 
 using namespace std;
 
-void deplacementJoueur(Carte& C,bool& perdu)
+/*void deplacementJoueur(Carte& C,bool& perdu)
 {
 	bool Vchoix= false;
 	int choix;
@@ -57,30 +57,30 @@ void deplacementJoueur(Carte& C,bool& perdu)
 		switch(choix)
 		{
 			case 8:
-				PosYJoueur = C.getJoueur(PosXJoueur);
+				C.getJoueur(PosXJoueur,PosYJoueur);
 				C.setJoueur(PosXJoueur,PosYJoueur,0,-1,perdu);
-				PosYJoueur = C.getJoueur(PosXJoueur);
+				C.getJoueur(PosXJoueur,PosYJoueur);
 				Vchoix=true;
 			 	break;
 
 			case 6: 
-				PosYJoueur = C.getJoueur(PosXJoueur);
+				C.getJoueur(PosXJoueur,PosYJoueur);
 				C.setJoueur(PosXJoueur,PosYJoueur,1,0,perdu);
-				PosYJoueur = C.getJoueur(PosXJoueur);
+				C.getJoueur(PosXJoueur,PosYJoueur);
 				Vchoix=true;
 			break;
 
 			case 2: 
-				PosYJoueur = C.getJoueur(PosXJoueur);
+				C.getJoueur(PosXJoueur,PosYJoueur);
 				C.setJoueur(PosXJoueur,PosYJoueur,0,1,perdu);
-				PosYJoueur = C.getJoueur(PosXJoueur);
+				C.getJoueur(PosXJoueur,PosYJoueur);
 				Vchoix=true;
 			break;
 
 			case 4: 
-				PosYJoueur = C.getJoueur(PosXJoueur);
+				C.getJoueur(PosXJoueur,PosYJoueur);
 				C.setJoueur(PosXJoueur,PosYJoueur,-1,0,perdu);
-				PosYJoueur = C.getJoueur(PosXJoueur);
+				C.getJoueur(PosXJoueur,PosYJoueur);
 				Vchoix=true;
 				break;
 
@@ -94,7 +94,7 @@ void deplacementJoueur(Carte& C,bool& perdu)
 	Vchoix=false;
 
 }
-
+*/
 
 void affiche(int** tab,QGraphicsScene* scene,QGraphicsItem* item,QPixmap image)
 {

@@ -8,9 +8,18 @@ fenetre::fenetre()
    _perdu = false;
 
    _C->afficherMap();
+   
    affiche(_C->getTileMap());
 
- 
+	addRect(-1,-1,401,401, QPen(), QBrush());
+
+	score = addText("Votre score est de : 0.");
+	effetP =addText(" ");
+
+	score->setPos(0,410);
+	effetP->setPos(0,430);
+
+ 	
 }
 
 void fenetre::affiche(int** tab)
@@ -107,47 +116,55 @@ fenetre::~fenetre()
 void fenetre::keyPressEvent(QKeyEvent* event){
 	
 int PosYJoueur,PosXJoueur;
+int scoreJ;
+std::string effet;
 if(_perdu != true)
 {
       if(event->key() == Qt::Key_Up)
         {
 
-           PosYJoueur = _C->getJoueur(PosXJoueur);
-            _C->setJoueur(PosXJoueur,PosYJoueur,0,-1,_perdu);
-            PosYJoueur = _C->getJoueur(PosXJoueur);
+           _C->getJoueur(PosXJoueur,PosYJoueur);
+            _C->setJoueur(PosXJoueur,PosYJoueur,0,-1,_perdu,scoreJ,effet);
+           _C->getJoueur(PosXJoueur,PosYJoueur);
 
             affiche(_C->getTileMap());
       }
       if(event->key() == Qt::Key_Down)
         {
 
-           PosYJoueur = _C->getJoueur(PosXJoueur);
-            _C->setJoueur(PosXJoueur,PosYJoueur,0,1,_perdu);
-            PosYJoueur = _C->getJoueur(PosXJoueur);
+           _C->getJoueur(PosXJoueur,PosYJoueur);
+            _C->setJoueur(PosXJoueur,PosYJoueur,0,1,_perdu,scoreJ,effet);
+           _C->getJoueur(PosXJoueur,PosYJoueur);
 
             affiche(_C->getTileMap());
       }
       if(event->key() == Qt::Key_Right)
         {
 
-           PosYJoueur = _C->getJoueur(PosXJoueur);
-            _C->setJoueur(PosXJoueur,PosYJoueur,1,0,_perdu);
-            PosYJoueur = _C->getJoueur(PosXJoueur);
+           _C->getJoueur(PosXJoueur,PosYJoueur);
+            _C->setJoueur(PosXJoueur,PosYJoueur,1,0,_perdu,scoreJ,effet);
+           _C->getJoueur(PosXJoueur,PosYJoueur);
 
             affiche(_C->getTileMap());
       }
       if(event->key() == Qt::Key_Left)
         {
 
-           PosYJoueur = _C->getJoueur(PosXJoueur);
-            _C->setJoueur(PosXJoueur,PosYJoueur,-1,0,_perdu);
-            PosYJoueur = _C->getJoueur(PosXJoueur);
+           _C->getJoueur(PosXJoueur,PosYJoueur);
+            _C->setJoueur(PosXJoueur,PosYJoueur,-1,0,_perdu,scoreJ,effet);
+           _C->getJoueur(PosXJoueur,PosYJoueur);
 
             affiche(_C->getTileMap());
       }
 
       _C->DeplacementFantome(_perdu);
    }
+   
+   QString textScore = QString::number(scoreJ);
+   score->setPlainText(textScore);
+  score->setPlainText("Votre score est de : "+QString::number(scoreJ));
+
+  effetP->setPlainText(QString::fromStdString(effet));
 
 }
 

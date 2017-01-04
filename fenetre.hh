@@ -31,7 +31,8 @@ class fenetre :  public QGraphicsScene
 
 protected: 
 	Carte* _C;
-	//QGridLayout *gridLayout = new QGridLayout(this);
-	QLabel* label[NBLINE][NBCOLONE]; 
+	
+	QGraphicsTextItem * score;
+	QGraphicsTextItem * effetP;
 	bool _perdu;
 };

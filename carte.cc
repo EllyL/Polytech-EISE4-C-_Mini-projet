@@ -157,7 +157,7 @@ void Carte::afficherMap(void){
    cout << endl;
 }
 
-int Carte::getJoueur(int& k){
+void Carte::getJoueur(int& k , int& l){
 
   unsigned int i,j;
    for(i=0;i<_ligne;i++)
@@ -167,19 +167,19 @@ int Carte::getJoueur(int& k){
          if(_map[i][j]->getclass()=="Joueur")
          {
             k= j;
-            return i;
+            l= i;
          }
       }
    }
-   return -1;
 }
 
-void Carte::setJoueur(int x, int y,int decX, int decY,bool& perdu)
+void Carte::setJoueur(int x, int y,int decX, int decY,bool& perdu, int& scoreJ, std::string& effet)
 {
 
    if(static_cast<Joueur*>(_map[y][x])->get_bonus() >0)
    {
       static_cast<Joueur*>(_map[y][x])->set_bonus(static_cast<Joueur*>(_map[y][x])->get_bonus() -1);
+      effet = "il vous reste " + to_string(static_cast<Joueur*>(_map[y][x])->get_bonus())+ " tour d'invicibilité";
       std::cout << "il vous reste " <<  static_cast<Joueur*>(_map[y][x])->get_bonus() << " tour d'invicibilité"<< std::endl;
    }
 
@@ -189,11 +189,19 @@ if((x+decX) >=0 && (x+decX) <(int)_colonne && (y+decY)>= 0 && (y+decY) < (int)_l
    {
     
          std::cout<<"MUR!"<<std::endl;
+          scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
 
    }
    else if(_map[y+decY][x+decX]->getclass() == "Prison")
    {
       perdu =true;
+       scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
+
+      if(effet != "")
+          effet += "\n"+static_cast<Prison*>(_map[y+decY][x+decX])->get_effet();
+      else
+        effet = static_cast<Prison*>(_map[y+decY][x+decX])->get_effet();
+
        std::cout << static_cast<Prison*>(_map[y+decY][x+decX])->get_effet() << std::endl;
    }
 
@@ -203,6 +211,11 @@ if((x+decX) >=0 && (x+decX) <(int)_colonne && (y+decY)>= 0 && (y+decY) < (int)_l
       {
         static_cast<Joueur*>(_map[y][x])->set_score( static_cast<Vote*>(_map[y+decY][x+decX])->get_point() +  static_cast<Joueur*>(_map[y][x])->get_score() );
          std::cout << static_cast<Vote*>(_map[y+decY][x+decX])->get_effet() << std::endl;
+
+      if(effet != "")
+          effet += "\n"+static_cast<Vote*>(_map[y+decY][x+decX])->get_effet();
+      else
+        effet = static_cast<Vote*>(_map[y+decY][x+decX])->get_effet();
        }
 
 
@@ -210,6 +223,12 @@ if((x+decX) >=0 && (x+decX) <(int)_colonne && (y+decY)>= 0 && (y+decY) < (int)_l
       {
         static_cast<Joueur*>(_map[y][x])->set_bonus(static_cast<Bonus*>(_map[y+decY][x+decX])->get_duree() );
          std::cout << static_cast<Bonus*>(_map[y+decY][x+decX])->get_effet() << std::endl;
+
+
+      if(effet != "")
+          effet += "\n"+static_cast<Bonus*>(_map[y+decY][x+decX])->get_effet();
+      else
+        effet = static_cast<Bonus*>(_map[y+decY][x+decX])->get_effet();
        }
 
 
@@ -222,19 +241,23 @@ if((x+decX) >=0 && (x+decX) <(int)_colonne && (y+decY)>= 0 && (y+decY) < (int)_l
          else{
             perdu =true;
             std::cout << "Vous avez perdu !" << std::endl;
+             scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
          }  
       }  
    
 
       std::cout << "votre score est de :" <<  static_cast<Joueur*>(_map[y][x])->get_score() << std::endl;
 
+      scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
+
       _map[y][x]->set_posx(x+decX);
       _map[y][x]->set_posy(y+decY);
       _map[y+decY][x+decX] = _map[y][x];
       _map[y][x] = new Chemin(y,x);
    }
-   
+    
 }
+
 }
 
 void Carte::setFantome(int x, int y,int decX, int decY,bool& perdu)
@@ -286,8 +309,8 @@ void Carte::DeplacementFantome(bool &perdu)
       {
           if(_map[i][j]->getclass()=="Fantome")
          {
-               depX =( rand()%2) -1;               // -1, 0, ou 1
-               depY=( rand()%2) -1;
+               depX =( rand()%3) -1;               // -1, 0, ou 1
+               depY=( rand()%3) -1;
                setFantome(j,i,depX,depY,perdu);
          }
 

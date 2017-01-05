@@ -17,6 +17,7 @@
 #define NBLINE	20
 #define NBCOLONE 20
 #define NBF 4
+#define NBENV 10
 
 class fenetre :  public QGraphicsScene
 {
@@ -25,6 +26,7 @@ class fenetre :  public QGraphicsScene
 	fenetre();
 	~fenetre();
 	void keyPressEvent(QKeyEvent* event);
+	void MessageBox(std::string Msg);
 	//void keyReleaseEvent(QKeyEvent *event);
 
 	void affiche(int** tab);
@@ -35,4 +37,5 @@ protected:
 	QGraphicsTextItem * score;
 	QGraphicsTextItem * effetP;
 	bool _perdu;
+	bool _arreter;
 };

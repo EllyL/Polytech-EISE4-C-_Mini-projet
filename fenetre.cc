@@ -4,7 +4,8 @@ fenetre::fenetre()
 {
 
    //parametre ligne , colonne ,Joueur, Bonus, Fantome, Vote, Prison
-   _C= new Carte(NBLINE,NBCOLONE,1,2,NBF,15,2);
+   _C= new Carte(NBLINE,NBCOLONE,1,2,NBF,NBENV,2);
+   _arreter = false;
    _perdu = false;
 
    _C->afficherMap();
@@ -113,56 +114,102 @@ fenetre::~fenetre()
 
 }
 
+
+
+
+
+void fenetre::MessageBox(std::string Msg)
+{
+				QMessageBox msgBox;
+				msgBox.setWindowTitle("Fin de la partie");
+				msgBox.setText(QString::fromStdString(Msg));
+
+				msgBox.setStandardButtons(QMessageBox::Ok);
+
+					if(msgBox.exec() == QMessageBox::Ok)
+					{
+						exit(0);
+					}
+
+}
+
 void fenetre::keyPressEvent(QKeyEvent* event){
 	
 int PosYJoueur,PosXJoueur;
 int scoreJ;
 std::string effet;
+
+
+
+
 if(_perdu != true)
 {
       if(event->key() == Qt::Key_Up)
         {
 
            _C->getJoueur(PosXJoueur,PosYJoueur);
-            _C->setJoueur(PosXJoueur,PosYJoueur,0,-1,_perdu,scoreJ,effet);
+            _C->setJoueur(PosXJoueur,PosYJoueur,0,-1,_perdu,scoreJ,effet,_arreter);
            _C->getJoueur(PosXJoueur,PosYJoueur);
 
             affiche(_C->getTileMap());
+
+
       }
       if(event->key() == Qt::Key_Down)
         {
 
            _C->getJoueur(PosXJoueur,PosYJoueur);
-            _C->setJoueur(PosXJoueur,PosYJoueur,0,1,_perdu,scoreJ,effet);
+            _C->setJoueur(PosXJoueur,PosYJoueur,0,1,_perdu,scoreJ,effet,_arreter);
            _C->getJoueur(PosXJoueur,PosYJoueur);
 
             affiche(_C->getTileMap());
+
+
+          
       }
       if(event->key() == Qt::Key_Right)
         {
 
            _C->getJoueur(PosXJoueur,PosYJoueur);
-            _C->setJoueur(PosXJoueur,PosYJoueur,1,0,_perdu,scoreJ,effet);
+            _C->setJoueur(PosXJoueur,PosYJoueur,1,0,_perdu,scoreJ,effet,_arreter);
            _C->getJoueur(PosXJoueur,PosYJoueur);
 
             affiche(_C->getTileMap());
+
+
       }
       if(event->key() == Qt::Key_Left)
         {
 
            _C->getJoueur(PosXJoueur,PosYJoueur);
-            _C->setJoueur(PosXJoueur,PosYJoueur,-1,0,_perdu,scoreJ,effet);
+            _C->setJoueur(PosXJoueur,PosYJoueur,-1,0,_perdu,scoreJ,effet,_arreter);
            _C->getJoueur(PosXJoueur,PosYJoueur);
 
             affiche(_C->getTileMap());
       }
 
+
+      if( scoreJ/10 > (NBENV*50)/100)		// si on obtient 70% des votes on gagne
+        {
+            	
+            		MessageBox("Vous avez gagné !");
+       }
       _C->DeplacementFantome(_perdu);
+
+
+  }
+   else
+   {
+
+		if(_arreter == true)
+			MessageBox("Vous avez été arrêté !");
+		
+		else
+			MessageBox("Vous avez perdu !");
+
    }
    
-   QString textScore = QString::number(scoreJ);
-   score->setPlainText(textScore);
-  score->setPlainText("Votre score est de : "+QString::number(scoreJ));
+  score->setPlainText("Votre score est de : " + QString::number(scoreJ));
 
   effetP->setPlainText(QString::fromStdString(effet));
 

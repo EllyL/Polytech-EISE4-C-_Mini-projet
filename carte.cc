@@ -14,6 +14,7 @@ Carte::Carte(){
 
    _ligne = DEF_SIZE;
    _colonne = DEF_SIZE;
+   _nbEnv = _ligne*_colonne;
 
 	_map = (ComposantM***) malloc(sizeof(ComposantM**)*_ligne);
    for(unsigned int i=0; i<_ligne; i++)
@@ -36,6 +37,8 @@ Carte::Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, un
 
    unsigned int i, j, k;
 
+   _nbEnv = nbVote;
+
 	_map = (ComposantM***) malloc(sizeof(ComposantM**)*_ligne);
    for(i=0; i<ligne; i++)
       _map[i] = (ComposantM**) malloc(sizeof(ComposantM*)*_colonne);
@@ -52,6 +55,7 @@ Carte::Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, un
        if(_map[i][j]->getclass()=="Chemin"){
             _map[i][j] = new Joueur(i, j);
             k++;
+            _nbEnv--;
          }
    }
 
@@ -63,6 +67,7 @@ Carte::Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, un
       if(_map[i][j]->getclass()=="Chemin"){
             _map[i][j] = new Bonus(i, j);
             k++;
+            
          }
    }
 
@@ -74,6 +79,7 @@ Carte::Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, un
       if(_map[i][j]->getclass()=="Chemin"){
           _map[i][j] = new Prison(i, j);
           k++;
+          
        }
    }
 
@@ -85,6 +91,7 @@ Carte::Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, un
       if(_map[i][j]->getclass()=="Chemin"){
          _map[i][j] = new Vote(i, j);
          k++;
+         
       }
    }
 
@@ -96,6 +103,7 @@ Carte::Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, un
       if(_map[i][j]->getclass()=="Chemin"){
          _map[i][j] = new Fantome(i, j);
          k++;
+        
       }
    }
 
@@ -106,6 +114,7 @@ Carte::Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, un
       if(_map[i][j]->getclass()=="Chemin"){
           _map[i][j] = new Obstacle(i, j);
           k++;
+          
       }
    }
 }
@@ -173,7 +182,7 @@ void Carte::getJoueur(int& k , int& l){
    }
 }
 
-void Carte::setJoueur(int x, int y,int decX, int decY,bool& perdu, int& scoreJ, std::string& effet)
+void Carte::setJoueur(int x, int y,int decX, int decY,bool& perdu, int& scoreJ, std::string& effet, bool& arreter)
 {
 
    if(static_cast<Joueur*>(_map[y][x])->get_bonus() >0)
@@ -189,13 +198,16 @@ if((x+decX) >=0 && (x+decX) <(int)_colonne && (y+decY)>= 0 && (y+decY) < (int)_l
    {
     
          std::cout<<"MUR!"<<std::endl;
-          scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
+          if(_map[y][x]->getclass() == "Joueur")
+            scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
 
    }
    else if(_map[y+decY][x+decX]->getclass() == "Prison")
    {
+      arreter = true;
       perdu =true;
-       scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
+       if(_map[y][x]->getclass() == "Joueur")
+        scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
 
       if(effet != "")
           effet += "\n"+static_cast<Prison*>(_map[y+decY][x+decX])->get_effet();
@@ -241,23 +253,49 @@ if((x+decX) >=0 && (x+decX) <(int)_colonne && (y+decY)>= 0 && (y+decY) < (int)_l
          else{
             perdu =true;
             std::cout << "Vous avez perdu !" << std::endl;
-             scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
+             if(_map[y][x]->getclass() == "Joueur")
+                scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
          }  
       }  
    
 
       std::cout << "votre score est de :" <<  static_cast<Joueur*>(_map[y][x])->get_score() << std::endl;
 
-      scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
+      if(_map[y][x]->getclass() == "Joueur")
+        scoreJ = static_cast<Joueur*>(_map[y][x])->get_score();
+
+      if( ( scoreJ/10 + comptEnv() ) < (_nbEnv*50) /100 )
+        perdu =true;
 
       _map[y][x]->set_posx(x+decX);
       _map[y][x]->set_posy(y+decY);
       _map[y+decY][x+decX] = _map[y][x];
       _map[y][x] = new Chemin(y,x);
+
+
+
+
+
+
    }
     
 }
 
+}
+
+int Carte::comptEnv()
+{
+  int cpt=0;
+   for(unsigned int i=0;i<_ligne;i++)
+   {
+      for(unsigned int j=0;j<_colonne;j++)
+      {
+         if(_map[i][j]->getclass()=="Vote")
+           cpt++;
+       }
+     }
+
+     return cpt;
 }
 
 void Carte::setFantome(int x, int y,int decX, int decY,bool& perdu)

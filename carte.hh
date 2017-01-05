@@ -23,6 +23,7 @@ class Carte {
 protected :
    unsigned int _ligne, _colonne;
 	ComposantM ***_map;
+	int _nbEnv;
 
 public :
    Carte();
@@ -39,10 +40,13 @@ public :
 
 
 	void getJoueur(int& k,int& l);
-	void setJoueur(int x, int y,int decX, int decY,bool& perdu, int& scoreJ, std::string& effet);
+	void setJoueur(int x, int y,int decX, int decY,bool& perdu, int& scoreJ, std::string& effet, bool& arreter);
 
 	void DeplacementFantome(bool& perdu);
 	void setFantome(int x, int y,int decX, int decY,bool& perdu);
+
+	int get_nbEnv(){return _nbEnv;};
+	int comptEnv();
 
 	int** getTileMap();
 };

@@ -26,6 +26,22 @@ Carte::Carte(){
       }
 
 }
+Carte::~Carte(){
+  for(int i=0;i< DEF_SIZE;i++)
+  {
+    for(int j=0;j<DEF_SIZE;j++)
+    {
+      delete[] _map[i][j];
+    }
+  }
+
+  for(int i=0; i< DEF_SIZE ; i++)
+  {
+    delete[] _map[i];
+  }
+
+  delete[] _map;
+}
 
 /*
  * Le constructeur va prendre le nom du type d'élément que l'on veut mettre en place, puis le nombre voulu de ce type.
@@ -313,18 +329,20 @@ if((x+decX) >=0 && (x+decX) <(int)_colonne && (y+decY)>= 0 && (y+decY) < (int)_l
       {
          if(static_cast<Joueur*>(_map[y+decY][x+decX])->get_bonus() > 0)
          {
+          delete _map[y][x];
            _map[y][x] = new Chemin(y,x);
          }
          else {
             perdu =true;
             std::cout << "Vous avez perdu !" << std::endl;
          }
-        
+         
       }
    else{
       _map[y][x]->set_posx(x+decX);
       _map[y][x]->set_posy(y+decY);
       _map[y+decY][x+decX] = _map[y][x];
+
       _map[y][x] = new Chemin(y,x);
    }
    

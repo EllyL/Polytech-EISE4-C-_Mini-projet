@@ -24,6 +24,7 @@ protected :
    unsigned int _ligne, _colonne;
 	ComposantM ***_map;
 	int _nbEnv;
+	int** tab;
 
 public :
    Carte();
@@ -31,7 +32,7 @@ public :
 	//Carte(unsigned int nbJoueur, unsigned int nbBonus, unsigned int nbFantome, unsigned int nbVote, unsigned int nbPrison);
 	// constructeur créant une carte avec les murs déja fait! 
 
-	//~Carte();
+	~Carte();
 
 	void afficherMap(void);
 
@@ -49,4 +50,5 @@ public :
 	int comptEnv();
 
 	int** getTileMap();
+	
 };

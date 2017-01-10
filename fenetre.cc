@@ -9,8 +9,11 @@ fenetre::fenetre()
    _perdu = false;
 
    _C->afficherMap();
+   std::cout<< "ici" << std::endl;
    
+
    affiche(_C->getTileMap());
+
 
 	addRect(-1,-1,401,401, QPen(), QBrush());
 
@@ -21,6 +24,12 @@ fenetre::fenetre()
 	effetP->setPos(0,430);
 
  	
+}
+
+fenetre::~fenetre()
+{
+  delete _C;
+
 }
 
 void fenetre::affiche(int** tab)
@@ -77,7 +86,7 @@ void fenetre::affiche(int** tab)
 
             if (tab[i][j] == 4)
             {
-              image.load("./image/fantome.png", 0, Qt::AutoColor);
+              image.load("./image/vlad2.jpg", 0, Qt::AutoColor);
             item = this->addPixmap(image);
               item->setPos(width, heigth);
               item->show();
@@ -105,14 +114,10 @@ void fenetre::affiche(int** tab)
       width = 0;
     }
 
-    }
-
-
-fenetre::~fenetre()
-{
-
-
 }
+
+
+
 
 
 
@@ -128,7 +133,7 @@ void fenetre::MessageBox(std::string Msg)
 
 					if(msgBox.exec() == QMessageBox::Ok)
 					{
-						exit(0);
+						QApplication::quit();
 					}
 
 }
@@ -151,6 +156,7 @@ if(_perdu != true)
             _C->setJoueur(PosXJoueur,PosYJoueur,0,-1,_perdu,scoreJ,effet,_arreter);
            _C->getJoueur(PosXJoueur,PosYJoueur);
 
+           
             affiche(_C->getTileMap());
 
 
@@ -162,7 +168,8 @@ if(_perdu != true)
             _C->setJoueur(PosXJoueur,PosYJoueur,0,1,_perdu,scoreJ,effet,_arreter);
            _C->getJoueur(PosXJoueur,PosYJoueur);
 
-            affiche(_C->getTileMap());
+           
+           affiche(_C->getTileMap());
 
 
           
@@ -174,7 +181,8 @@ if(_perdu != true)
             _C->setJoueur(PosXJoueur,PosYJoueur,1,0,_perdu,scoreJ,effet,_arreter);
            _C->getJoueur(PosXJoueur,PosYJoueur);
 
-            affiche(_C->getTileMap());
+           
+           affiche(_C->getTileMap());
 
 
       }
@@ -185,6 +193,7 @@ if(_perdu != true)
             _C->setJoueur(PosXJoueur,PosYJoueur,-1,0,_perdu,scoreJ,effet,_arreter);
            _C->getJoueur(PosXJoueur,PosYJoueur);
 
+           
             affiche(_C->getTileMap());
       }
 

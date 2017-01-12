@@ -22,7 +22,6 @@ public:
 	virtual string getclass() const =0;			//fonction renvoyant le nom de l'objet
 	virtual string affichage() const =0;		//fonction d'affichage de l'objet 
 
-
 	virtual ~ComposantM(){};
 	void set_posx(unsigned int x){_posx = x;}
 	unsigned int get_posx() {return _posx;}

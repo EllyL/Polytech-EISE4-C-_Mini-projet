@@ -21,7 +21,7 @@ public:
 	~Vote();
 
 
-	 string affichage() const;			//fonction d'affichage de l'objet 
+	 string affichage() const;								//fonction d'affichage de l'objet 
 	 string getclass() const{return "Vote";}				//fonction renvoyant le nom de l'objet
 	
 

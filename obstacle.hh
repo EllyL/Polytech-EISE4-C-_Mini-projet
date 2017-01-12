@@ -21,7 +21,7 @@ public:
 	~Obstacle();
 
 
-	 string affichage() const;			//fonction d'affichage de l'objet 
+	 string affichage() const;									//fonction d'affichage de l'objet 
 	 string getclass() const{return "Obstacle";}				//fonction renvoyant le nom de l'objet
 	
 

@@ -7,7 +7,6 @@ objet sur la carte.
 **************************************************************/
 
 
-//// A FINIR
 
 #pragma once 
 
@@ -46,7 +45,7 @@ public:
 
 
 protected:
-	unsigned int _score;
+	unsigned int _score;		//score du joueur
 	int _tpBonus;				//temps de bonus
 	bool _perdu;
 	

@@ -22,23 +22,6 @@
 
 #include "fenetre.hh"
 
-/****************/
-
-//Pas sur d'avoir besoin de tous ça
-/******************/
-#include <QApplication>
-#include <QtCore>
-#include <QtGui>
-#include <QPushButton>
-#include <QGridLayout>
-#include <QtWidgets>
-//#include <QDialog>
-
-
-
-/*#define NBLINE	20
-#define NBCOLONE 20
-#define NBF 4*/
 
 using namespace std;
 
@@ -47,13 +30,14 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
-	std::srand(std::time(0));
+	std::srand(std::time(0));					//définition de la graine pour faire des randoms
+
 	QApplication app(argc, argv);
-	fenetre *F1 = new fenetre();
+	fenetre *F1 = new fenetre();				//création de la fenetre
 	
 
 	QGraphicsView vue(F1);
-    vue.setFixedSize(500, 500);
+    vue.setFixedSize(500, 500);					// setup de la fenetre
     vue.setWindowTitle("PacMan");
     vue.show();
 

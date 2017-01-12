@@ -18,7 +18,7 @@ class Chemin: public ComposantM{
       Chemin(const Chemin &a);
       ~Chemin();
 
-      string affichage() const;			//fonction d'affichage de l'objet
+      string affichage() const;							
       string getclass() const{return "Chemin";}
       void operator= (const Chemin &a);
 

@@ -21,7 +21,7 @@ public:
 	~Prison();
 
 
-	 string affichage() const;			//fonction d'affichage de l'objet 
+	 string affichage() const;								//fonction d'affichage de l'objet 
 	 string getclass() const{return "Prison";}				//fonction renvoyant le nom de l'objet
 	
 

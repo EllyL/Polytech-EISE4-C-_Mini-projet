@@ -32,6 +32,9 @@ fenetre::~fenetre()
 
 }
 
+
+//permet l'affichage des éléments sur la fenetre
+
 void fenetre::affiche(int** tab)
 {
   
@@ -138,14 +141,14 @@ void fenetre::MessageBox(std::string Msg)
 
 }
 
+
+//fonction permettant de récupérer les évenements clavier
+
 void fenetre::keyPressEvent(QKeyEvent* event){
 	
 int PosYJoueur,PosXJoueur;
 int scoreJ;
 std::string effet;
-
-
-
 
 if(_perdu != true)
 {
@@ -223,13 +226,3 @@ if(_perdu != true)
   effetP->setPlainText(QString::fromStdString(effet));
 
 }
-
-
-
-
-
-/* void fenetre::keyReleaseEvent(QKeyEvent *event)
-   {
-     
-     
-   }*/

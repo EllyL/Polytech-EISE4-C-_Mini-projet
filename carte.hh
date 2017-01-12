@@ -21,8 +21,8 @@
 
 class Carte {
 protected :
-   unsigned int _ligne, _colonne;
-	ComposantM ***_map;
+   unsigned int _ligne, _colonne;			
+	ComposantM ***_map;						//carte du jeu
 	int _nbEnv;
 	int** tab;
 
@@ -40,9 +40,11 @@ public :
 	//ComposantM** getIndex ();
 
 
-	void getJoueur(int& k,int& l);
+	//fonctions permettant de récupérer la position et de déplacer le joueur
+	void getJoueur(int& k,int& l);			
 	void setJoueur(int x, int y,int decX, int decY,bool& perdu, int& scoreJ, std::string& effet, bool& arreter);
 
+	//fonctions permettant de déplacer les fantomes
 	void DeplacementFantome(bool& perdu);
 	void setFantome(int x, int y,int decX, int decY,bool& perdu);
 

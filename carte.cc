@@ -26,6 +26,7 @@ Carte::Carte(){
       }
 
 }
+
 Carte::~Carte(){
   for(int i=0;i< DEF_SIZE;i++)
   {
@@ -137,10 +138,8 @@ Carte::Carte(unsigned int ligne, unsigned int colonne, unsigned int nbJoueur, un
 
 
 
-/*Carte::Carte(unsigned int nbJoueur, unsigned int nbBonus, unsigned int nbFantome, unsigned int nbVote, unsigned int nbPrison);
- {
 
-}*/
+	// affichage de la carte sur le terminal
 
 void Carte::afficherMap(void){
 
@@ -182,6 +181,8 @@ void Carte::afficherMap(void){
    cout << endl;
 }
 
+
+	//fonction permettant de récupérer la position du joueur 
 void Carte::getJoueur(int& k , int& l){
 
   unsigned int i,j;
@@ -197,6 +198,8 @@ void Carte::getJoueur(int& k , int& l){
       }
    }
 }
+
+//fonction permettant de déplacer le Joueur dans la carte
 
 void Carte::setJoueur(int x, int y,int decX, int decY,bool& perdu, int& scoreJ, std::string& effet, bool& arreter)
 {
@@ -287,17 +290,13 @@ if((x+decX) >=0 && (x+decX) <(int)_colonne && (y+decY)>= 0 && (y+decY) < (int)_l
       _map[y][x]->set_posy(y+decY);
       _map[y+decY][x+decX] = _map[y][x];
       _map[y][x] = new Chemin(y,x);
-
-
-
-
-
-
    }
     
 }
 
 }
+
+
 
 int Carte::comptEnv()
 {
@@ -313,6 +312,9 @@ int Carte::comptEnv()
 
      return cpt;
 }
+
+
+//fonction permettant de déplacer les fantomes
 
 void Carte::setFantome(int x, int y,int decX, int decY,bool& perdu)
 {
@@ -376,6 +378,8 @@ void Carte::DeplacementFantome(bool &perdu)
 
 }
 
+
+//fonction générant la tileMap
 int** Carte::getTileMap(){
   int** tab;
  unsigned int i,j;

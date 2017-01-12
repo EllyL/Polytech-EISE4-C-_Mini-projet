@@ -7,8 +7,6 @@ objet sur la carte.
 **************************************************************/
 
 
-//// A FINIR
-
 #include "joueur.hh"
 #include <iostream>
 using namespace std;
